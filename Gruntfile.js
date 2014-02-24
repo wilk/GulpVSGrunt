@@ -1,3 +1,46 @@
-/**
- * Created by wilk on 24/02/14.
- */
+'use strict';
+
+module.exports = function (grunt) {
+    require('load-grunt-tasks')(grunt);
+    require('time-grunt')(grunt);
+
+    grunt.initConfig({
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            dist: ['app/**/*.js']
+        },
+        concat: {
+            dist: {
+                src: ['app/**/*.js'] ,
+                dest: 'dist/app.js'
+            }
+        },
+        copy: {
+            files: [{
+                expand: true,
+                dot: true,
+                cwd: 'app',
+                dest: 'dist',
+                src: [
+                    '*.js'
+                ]
+            }]
+        },
+        uglify: {
+            dist: {
+                files: {
+                    'dist/app.js': ['dist/app.js']
+                }
+            }
+        }
+    });
+
+    grunt.registerTask('build', [
+        'jshint',
+        'concat',
+        'copy',
+        'uglify'
+    ]);
+};
