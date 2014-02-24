@@ -17,17 +17,6 @@ module.exports = function (grunt) {
                 dest: 'dist/app.js'
             }
         },
-        copy: {
-            files: [{
-                expand: true,
-                dot: true,
-                cwd: 'app',
-                dest: 'dist',
-                src: [
-                    '*.js'
-                ]
-            }]
-        },
         uglify: {
             dist: {
                 files: {
@@ -40,7 +29,6 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'jshint',
         'concat',
-        'copy',
         'uglify'
     ]);
 };
